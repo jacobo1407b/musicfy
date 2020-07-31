@@ -39,4 +39,20 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ### `Login`
 
-![Alt text](public/login.png?raw=true "Title")
+![Alt text](public/login.png?raw=true "Login, firebase")
+
+### `Register`
+
+![Alt text](public/registro.png?raw=true "Register")
+
+### `Home`
+
+![Alt text](public/home.png?raw=true "Home page")
+
+### `Settings`
+
+![Alt text](public/settings.png?raw=true "Settings")
+
+### `Add artist`
+
+![Alt text](public/addArtist.png?raw=true "Settings")
