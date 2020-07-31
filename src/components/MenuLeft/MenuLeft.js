@@ -4,6 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import "./MenuLeft.scss";
 import { isUserAdmin } from "../../utils/Api";
 import BasicModal from "../Modal/BasicModal/BasicModal";
+import AddArtistForm from '../Artists/AddArtistForm/AddArtistForm';
 class MenuLeft extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +44,7 @@ class MenuLeft extends Component {
       case "artist":
         this.setState({
           titleModal: "Nuevo artista",
-          contentModal: <Cosa />,
+          contentModal: <AddArtistForm setShowModal={this.setShowModal} />,
           showModal: true
         });
         break;
@@ -112,7 +113,5 @@ class MenuLeft extends Component {
   }
 }
 
-const Cosa = () => {
-  return <h1>artistas</h1>;
-};
+
 export default withRouter(MenuLeft);
