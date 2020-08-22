@@ -4,7 +4,9 @@ import { Link, withRouter } from "react-router-dom";
 import "./MenuLeft.scss";
 import { isUserAdmin } from "../../utils/Api";
 import BasicModal from "../Modal/BasicModal/BasicModal";
-import AddArtistForm from '../Artists/AddArtistForm/AddArtistForm';
+import AddArtistForm from "../Artists/AddArtistForm/AddArtistForm";
+import AddAlbumForm from "../Album/AddAlbumForm/AddAlbumForm";
+import AddSongForm from "../Songs/AddSongForm/AddSongForm";
 class MenuLeft extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class MenuLeft extends Component {
       userAdmin: false,
       showModal: false,
       titleModal: null,
-      contentModal: null
+      contentModal: null,
     };
   }
 
@@ -25,41 +27,48 @@ class MenuLeft extends Component {
     let respuesta = await isUserAdmin(user.uid);
     this.setState({
       userAdmin: respuesta,
-      activeMenu: location.pathname
+      activeMenu: location.pathname,
     });
   }
   handlermenu = (e, menu) => {
     this.setState({
-      activeMenu: menu.to
+      activeMenu: menu.to,
     });
   };
-  setShowModal = data => {
+  setShowModal = (data) => {
     this.setState({
-      showModal: data
+      showModal: data,
     });
   };
 
-  handleModal = type => {
+  handleModal = (type) => {
     switch (type) {
       case "artist":
         this.setState({
           titleModal: "Nuevo artista",
           contentModal: <AddArtistForm setShowModal={this.setShowModal} />,
-          showModal: true
+          showModal: true,
+        });
+        break;
+      case "album":
+        this.setState({
+          titleModal: "Nuevo album",
+          contentModal: <AddAlbumForm setShowModal={this.setShowModal} />,
+          showModal: true,
         });
         break;
       case "song":
         this.setState({
           titleModal: "Nuevo cancion",
-          contentModal: <h2>Formulario nueva cancion</h2>,
-          showModal: true
+          contentModal: <AddSongForm setShowModal={this.setShowModal} />,
+          showModal: true,
         });
         break;
       default:
         this.setState({
           titleModal: null,
           contentModal: null,
-          showModal: false
+          showModal: false,
         });
         break;
     }
@@ -85,7 +94,15 @@ class MenuLeft extends Component {
               active={activeMenu === "/artistas"}
               onClick={this.handlermenu}
             >
-              <Icon name="music" /> Artistas
+              <Icon name="user" /> Artistas
+            </Menu.Item>
+            <Menu.Item
+              as={Link}
+              to="/albums"
+              active={activeMenu === "/albums"}
+              onClick={this.handlermenu}
+            >
+              <Icon name="window maximize outline" /> Albums
             </Menu.Item>
           </div>
 
@@ -93,6 +110,9 @@ class MenuLeft extends Component {
             <div className="footer">
               <Menu.Item onClick={() => this.handleModal("artist")}>
                 <Icon name="plus square outline" /> Nuevo artista
+              </Menu.Item>
+              <Menu.Item onClick={() => this.handleModal("album")}>
+                <Icon name="plus square outline" /> Nuevo album
               </Menu.Item>
               <Menu.Item onClick={() => this.handleModal("song")}>
                 <Icon name="plus square outline" /> Nuevo canción
@@ -112,6 +132,5 @@ class MenuLeft extends Component {
     );
   }
 }
-
 
 export default withRouter(MenuLeft);

@@ -1,5 +1,7 @@
 @import "../../scss/index.scss";
 
-.artist{
-    
+.artist {
+  &__content {
+    margin: 50px;
+  }
 }
